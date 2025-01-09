@@ -1,3 +1,4 @@
+import 'package:aayushman_bhaarat/home_screen/home_screen.dart';
 import 'package:aayushman_bhaarat/utils/color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,7 +27,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Text(
               "Hello Pranav!",
               textAlign: TextAlign.center,
-              style: GoogleFonts.mitr(color: primaryColor, fontWeight: FontWeight.w600, fontSize: 26),
+              style: GoogleFonts.mitr(color: primaryColor, fontWeight: FontWeight.w500, fontSize: 26),
             ),
             const SizedBox(height: 6),
             Row(
@@ -38,13 +39,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ],
             ),
             const SizedBox(height: 30),
-            Container(
-              height: 52,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: primaryColor),
-              child: Text(
-                "Next",
-                style: GoogleFonts.mitr(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 16),
+            InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (ctx) => const HomeScreen()));
+              },
+              child: Container(
+                height: 52,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: primaryColor),
+                child: Text(
+                  "Next",
+                  style: GoogleFonts.mitr(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 16),
+                ),
               ),
             )
           ],
