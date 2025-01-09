@@ -1,3 +1,4 @@
+import 'package:aayushman_bhaarat/onboarding_screen/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'language_screen/language_screen.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple), useMaterial3: true),
-      home: const LanguageScreen(),
+      home: const OnBoardingScreen(),
     );
   }
 }
