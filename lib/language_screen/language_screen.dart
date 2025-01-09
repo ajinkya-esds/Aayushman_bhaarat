@@ -18,7 +18,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_back_ios_new, size: 28)),
+        leading: IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_back_ios_new, size: 20)),
         title: Text(
           "Select Language",
           style: GoogleFonts.mitr(color: appbarTitleColor, fontWeight: FontWeight.w400, fontSize: 18),
