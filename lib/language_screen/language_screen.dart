@@ -1,4 +1,5 @@
 import 'package:aayushman_bhaarat/utils/color_scheme.dart';
+import 'package:aayushman_bhaarat/welcome_screen/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -83,14 +84,19 @@ class _LanguageScreenState extends State<LanguageScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        height: 52,
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: primaryColor),
-        child: Text(
-          "Next",
-          style: GoogleFonts.mitr(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 16),
+      bottomNavigationBar: InkWell(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (ctx) => const WelcomeScreen()));
+        },
+        child: Container(
+          height: 52,
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: primaryColor),
+          child: Text(
+            "Next",
+            style: GoogleFonts.mitr(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 16),
+          ),
         ),
       ),
     );
