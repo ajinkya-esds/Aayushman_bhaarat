@@ -1,5 +1,4 @@
 import 'package:aayushman_bhaarat/language_screen/language_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../weight/slide_action.dart';
@@ -33,19 +32,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               Stack(
                 children: [
                   CustomPaint(
-                    size: Size(390, 162),
+                    size: const Size(390, 162),
                     painter: RPSCustomPainter(),
                   ),
-                  Container(height: MediaQuery.of(context).size.height * 0.18, width: MediaQuery.of(context).size.width, child: Image.asset("asset/digital_india.png"))
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.18, width: MediaQuery.of(context).size.width, child: Image.asset("asset/digital_india.png"))
                 ],
               ),
               Stack(
                 children: [
                   CustomPaint(
-                    size: Size(390, 256),
+                    size: const Size(390, 256),
                     painter: NewRPSCustomPainter(),
                   ),
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,8 +52,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       children: [
                         Container(
                             width: MediaQuery.of(context).size.width * 0.8,
-                            margin: EdgeInsets.only(top: 45),
-                            child: Text(
+                            margin: const EdgeInsets.only(top: 45),
+                            child: const Text(
                               "Easily Consult Top Doctors Online & In-Person",
                               style: TextStyle(
                                 color: Colors.white,
@@ -65,8 +64,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             )),
                         Container(
                             width: MediaQuery.of(context).size.width * 0.8,
-                            margin: EdgeInsets.only(top: 5),
-                            child: Text(
+                            margin: const EdgeInsets.only(top: 5),
+                            child: const Text(
                               "Consult today",
                               style: TextStyle(
                                 color: Colors.white,
@@ -75,7 +74,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                               ),
                               textAlign: TextAlign.center,
                             )),
-                        Container(
+                        SizedBox(
                           width: MediaQuery.of(context).size.width * 0.8,
                           height: MediaQuery.of(context).size.width * 0.3,
                           child: Builder(
@@ -87,14 +86,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                   key: _key,
                                   onSubmit: () {
                                     Future.delayed(
-                                      Duration(milliseconds: 500),
+                                      const Duration(milliseconds: 500),
                                       () {
                                         Navigator.push(context, MaterialPageRoute(builder: (ctx) => const LanguageScreen()));
                                       },
                                     );
                                     return null;
                                   },
-                                  innerColor: Color(0xff11B3CF).withOpacity(1.0),
+                                  innerColor: const Color(0xff11B3CF).withOpacity(1.0),
                                   outerColor: Colors.white,
                                   alignment: Alignment.centerRight,
                                   child: Text(
@@ -102,7 +101,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
-                                      color: Color(0xff11B3CF).withOpacity(1.0),
+                                      color: const Color(0xff11B3CF).withOpacity(1.0),
                                     ),
                                   ),
                                 ),
@@ -136,7 +135,7 @@ class RPSCustomPainter extends CustomPainter {
     path_0.close();
 
     Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
-    paint_0_fill.color = Color(0xff11B3CF).withOpacity(1.0);
+    paint_0_fill.color = const Color(0xff11B3CF).withOpacity(1.0);
     canvas.drawPath(path_0, paint_0_fill);
   }
 
@@ -159,7 +158,7 @@ class NewRPSCustomPainter extends CustomPainter {
     path_0.close();
 
     Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
-    paint_0_fill.color = Color(0xff11B3CF).withOpacity(1.0);
+    paint_0_fill.color = const Color(0xff11B3CF).withOpacity(1.0);
     canvas.drawPath(path_0, paint_0_fill);
   }
 

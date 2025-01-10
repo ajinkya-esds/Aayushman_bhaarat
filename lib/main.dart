@@ -1,13 +1,12 @@
-import 'package:aayushman_bhaarat/onboarding_screen/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'language_screen/language_screen.dart';
+import 'onboarding_screen/on_boarding_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // Ensures bindings are initialized
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
-    runApp(MyApp());
+    runApp(const MyApp());
   });
 }
 
