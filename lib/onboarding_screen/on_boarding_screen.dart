@@ -1,8 +1,6 @@
 import 'package:aayushman_bhaarat/language_screen/language_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../weight/slide_action.dart';
-
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
 
@@ -12,10 +10,21 @@ class OnBoardingScreen extends StatefulWidget {
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
+  void initState() {
+    // TODO: implement initState
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx) => const LanguageScreen()));
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Stack(
+      body: SafeArea(
+        child: Image.asset("asset/splash_new.png", height: MediaQuery.of(context).size.height, width: MediaQuery.of(context).size.width, fit: BoxFit.fill),
+      ) /*Stack(
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 20.0),
@@ -117,7 +126,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             ],
           ),
         ],
-      ),
+      )*/
+      ,
     );
   }
 }

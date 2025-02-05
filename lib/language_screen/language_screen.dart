@@ -12,90 +12,105 @@ class LanguageScreen extends StatefulWidget {
 
 class _LanguageScreenState extends State<LanguageScreen> {
   String selectedLanguage = "English";
-  List<String> languageList = ["English", "Hindi", "Marathi", "Gujrati", "Odiya", "Kannada", "Bengali", "Telugu"];
+  List<Map<String, String>> languageList = [
+    {"title": "English", "subtitle": "A"},
+    {"title": "Hindi", "subtitle": "ए"},
+    {"title": "Marathi", "subtitle": "अ"},
+    {"title": "Gujrati", "subtitle": "અ"},
+    {"title": "Odiya", "subtitle": "ଓ"},
+    {"title": "Malayalam", "subtitle": "എ"},
+    {"title": "Tamil", "subtitle": "அ"},
+    {"title": "Kannada", "subtitle": "ಅ"},
+    {"title": "Bengali", "subtitle": "ক"},
+    {"title": "Telugu", "subtitle": "அ"}
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_back_ios_new, size: 20)),
+        centerTitle: true,
+        // leading: IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_back_ios_new, size: 20)),
         title: Text(
           "Select Language",
-          style: GoogleFonts.mitr(color: appbarTitleColor, fontWeight: FontWeight.w400, fontSize: 18),
+          style: GoogleFonts.lato(color: appbarTitleColor, fontWeight: FontWeight.w700, fontSize: 24),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        child: Column(
-          children: [
-            Container(
-              width: double.maxFinite,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              // height: 60,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color(0xffF79D25).withOpacity(0.2)),
-              child: Text(
-                "Select your preferred language for a personalized experience.You can always change it later!",
-                textAlign: TextAlign.center,
-                style: TextStyle(color: secondaryColor, fontWeight: FontWeight.w400, fontSize: 14),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          child: Column(
+            children: [
+              Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.only(left: 16, top: 2),
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.grey)),
+                child: TextField(
+                  textAlign: TextAlign.start,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: "Search Language",
+                    suffixIcon: const Icon(Icons.search_rounded),
+                    hintStyle: GoogleFonts.lato(color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 16),
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(height: 12),
-            Expanded(
-              child: ListView.builder(
-                itemBuilder: (ctx, index) {
-                  return InkWell(
-                    onTap: () {
-                      selectedLanguage = languageList[index];
-                      setState(() {});
-                    },
-                    child: Container(
-                        margin: const EdgeInsets.only(bottom: 12),
-                        padding: const EdgeInsets.only(left: 16, top: 4, bottom: 4),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: selectedLanguage == languageList[index] ? primaryColor.withOpacity(0.2) : Colors.transparent,
-                            border:
-                                Border.all(color: selectedLanguage == languageList[index] ? primaryColor : primaryColor.withOpacity(0.4), width: selectedLanguage == languageList[index] ? 2 : 0.6)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              languageList[index],
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: selectedLanguage == languageList[index] ? Colors.black : Colors.grey, fontWeight: FontWeight.w500, fontSize: 16),
-                            ),
-                            Radio<String>(
-                              value: languageList[index],
-                              groupValue: selectedLanguage,
-                              activeColor: primaryColor,
-                              onChanged: (value) {
-                                setState(() {
-                                  selectedLanguage = value!;
-                                });
-                              },
-                            )
-                          ],
-                        )),
-                  );
-                },
-                itemCount: languageList.length,
+              const SizedBox(height: 12),
+              Expanded(
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 8, mainAxisSpacing: 2, childAspectRatio: 1.4),
+                  itemCount: languageList.length, // Number of items
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                        onTap: () {
+                          selectedLanguage = languageList[index]['title']!;
+                          setState(() {});
+                        },
+                        child: Container(
+                            margin: const EdgeInsets.only(bottom: 12),
+                            padding: const EdgeInsets.only(left: 16, top: 4, bottom: 4),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                gradient: selectedLanguage == languageList[index]['title']!
+                                    ? const LinearGradient(colors: [Color(0xff3A63ED), Color(0xff085997)], begin: Alignment.centerLeft, end: Alignment.centerRight)
+                                    : null,
+                                // color: selectedLanguage == languageList[index]['title']! ? primaryColor.withOpacity(0.2) : Colors.transparent,
+                                border: selectedLanguage != languageList[index]['title']! ? Border.all(color: Colors.grey, width: selectedLanguage == languageList[index]['title'] ? 2 : 0.6) : null),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  languageList[index]['title'] ?? "",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.poppins(color: selectedLanguage != languageList[index]['title']! ? Colors.black : Colors.white, fontWeight: FontWeight.w700, fontSize: 14),
+                                ),
+                                Center(
+                                  child: Text(
+                                    languageList[index]['subtitle'] ?? "",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.poppins(color: selectedLanguage != languageList[index]['title']! ? Colors.black : Colors.white, fontWeight: FontWeight.w400, fontSize: 48),
+                                  ),
+                                ),
+                              ],
+                            )));
+                  },
+                ),
               ),
-            )
-          ],
-        ),
-      ),
+            ],
+          )),
       bottomNavigationBar: InkWell(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (ctx) => const WelcomeScreen()));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx) => const WelcomeScreen()));
         },
         child: Container(
           height: 52,
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           alignment: Alignment.center,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: primaryColor),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20), gradient: const LinearGradient(colors: [Color(0xff3A63ED), Color(0xff085997)], begin: Alignment.centerLeft, end: Alignment.centerRight)),
           child: Text(
-            "Next",
-            style: GoogleFonts.mitr(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 16),
+            "Get Started",
+            style: GoogleFonts.lato(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 16),
           ),
         ),
       ),

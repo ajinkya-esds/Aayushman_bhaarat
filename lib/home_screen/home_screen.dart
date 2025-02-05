@@ -11,11 +11,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> _sKey = GlobalKey();
   List<Map<String, dynamic>> myProfileList = [
-    {'title': "Personal Profile", "image": "asset/profile_summery.svg", 'color': secondaryColor, 'titleColor': secondaryColor},
-    {'title': "Medical History", "image": "asset/medical_history.svg", 'color': primaryColor.withOpacity(0.2), 'titleColor': primaryColor},
-    {'title': "Family History", "image": "asset/family_history.svg", 'color': primaryColor.withOpacity(0.2), 'titleColor': primaryColor},
-    {'title': "Lifestyle", "image": "asset/meditation.svg", 'color': primaryColor.withOpacity(0.2), 'titleColor': primaryColor},
+    {'title': "Pranav’s Profile", "time": "Updated 2d ago", "image": "asset/Profile.png", 'color': const Color(0xff3A63ED), 'titleColor': secondaryColor},
+    {'title': "Medical Info", "time": "Updated 2d ago", "image": "asset/medical_info.png", 'color': const Color(0xff3A63ED), 'titleColor': primaryColor},
+    {'title': "Family Info", "time": "Updated 2d ago", "image": "asset/family_info.png", 'color': const Color(0xffC2CFF9), 'titleColor': primaryColor},
+    {'title': "Lifestyle", "time": "Updated 2d ago", "image": "asset/life_info.png", 'color': const Color(0xffC2CFF9), 'titleColor': primaryColor},
   ];
 
   List<Map<String, dynamic>> appointmentList = [
@@ -45,492 +46,620 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Column(
-          children: [
-            Row(
-              children: [
-                Image.asset("asset/welcome.png", width: 16, height: 16, fit: BoxFit.fill),
-                const SizedBox(width: 4),
-                Text(
-                  "Hello Pranav!",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.mitr(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 16),
-                ),
-              ],
-            ),
-            const SizedBox(height: 4),
-            Row(
-              children: [
-                Icon(Icons.location_on_outlined, color: secondaryColor, size: 16),
-                const SizedBox(width: 4),
-                Text(
-                  "ESDS Software Solution,Satpur MIDC,Nashik",
-                  style: GoogleFonts.mitr(color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 12),
-                ),
-              ],
-            )
-          ],
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0, top: 10),
-            child: Column(
-              children: [
-                Icon(Icons.language, color: secondaryColor, size: 26),
-                const SizedBox(width: 4),
-                Text(
-                  "ENG",
-                  style: GoogleFonts.mitr(color: secondaryColor, fontWeight: FontWeight.w300, fontSize: 12),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
+      key: _sKey,
       bottomNavigationBar: Container(
-        height: 50,
-        padding: const EdgeInsets.only(top: 4),
+        height: 58,
+        padding: const EdgeInsets.only(top: 8),
+        decoration: BoxDecoration(borderRadius: const BorderRadius.only(topLeft: Radius.circular(14), topRight: Radius.circular(14)), border: Border.all(color: Colors.grey.shade200, width: 2)),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Column(
               children: [
-                SvgPicture.asset("asset/home.svg", height: 24, width: 24, color: primaryColor),
+                SvgPicture.asset("asset/home.svg", height: 24, width: 24, color: const Color(0xff3A63ED)),
                 const SizedBox(height: 2),
                 Text(
                   "Home",
-                  style: GoogleFonts.mitr(color: primaryColor, fontWeight: FontWeight.w300, fontSize: 12),
+                  style: GoogleFonts.lato(color: const Color(0xff3A63ED), fontWeight: FontWeight.w400, fontSize: 12),
                 ),
               ],
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               margin: const EdgeInsets.only(bottom: 8),
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(64), color: primaryColor),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(64), color: const Color(0xff3A63ED)),
               child: Row(
                 children: [
-                  CircleAvatar(child: Icon(Icons.mic, color: primaryColor), backgroundColor: Colors.white),
+                  const CircleAvatar(backgroundColor: Colors.white, child: Icon(Icons.mic, color: Color(0xff3A63ED))),
                   const SizedBox(width: 6),
                   Text(
                     "Tap to ask",
-                    style: GoogleFonts.mitr(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 12),
+                    style: GoogleFonts.lato(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 12),
                   ),
                 ],
               ),
             ),
             Column(
               children: [
-                SvgPicture.asset("asset/book.svg", height: 24, width: 24),
+                SvgPicture.asset("asset/alert.svg", height: 24, width: 24),
                 const SizedBox(height: 2),
                 Text(
-                  "Book",
-                  style: GoogleFonts.mitr(color: Colors.grey, fontWeight: FontWeight.w300, fontSize: 12),
+                  "Alerts",
+                  style: GoogleFonts.lato(color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 12),
                 ),
               ],
             ),
           ],
         ),
       ),
-      body: SingleChildScrollView(
+      drawer: Drawer(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            Container(
+              padding: const EdgeInsets.only(left: 24, top: 30, bottom: 20, right: 12),
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(14)),
+                  gradient: LinearGradient(colors: [Color(0xff3A63ED), Color(0xff085997)], begin: Alignment.centerLeft, end: Alignment.centerRight)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "My Profile",
-                    style: GoogleFonts.mitr(color: primaryColor, fontWeight: FontWeight.w400, fontSize: 18),
-                  ),
-                  Text(
-                    "75% Completed",
-                    style: GoogleFonts.mitr(color: secondaryColor, fontWeight: FontWeight.w300, fontSize: 14),
-                  ),
-                ],
-              ),
-            ),
-            Padding(padding: const EdgeInsets.symmetric(horizontal: 16), child: buildMyProfileCard()),
-            const SizedBox(height: 12),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Upcoming Appointment",
-                    style: GoogleFonts.mitr(color: primaryColor, fontWeight: FontWeight.w400, fontSize: 18),
-                  ),
-                  Text(
-                    "View all",
-                    style: GoogleFonts.mitr(color: primaryColor, fontWeight: FontWeight.w300, fontSize: 14),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 12),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (ctx, index) {
-                  return Container(
-                    height: 147,
-                    margin: const EdgeInsets.only(bottom: 12),
-                    child: Stack(
-                      children: [
-                        Container(
-                          height: 120,
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(18), color: primaryColor.withOpacity(0.05), border: Border.all(color: primaryColor)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Image.asset(appointmentList[index]['image'], height: 119, width: 120, fit: BoxFit.cover),
-                              Text(
-                                appointmentList[index]['title'],
-                                style: GoogleFonts.mitr(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 16),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                            bottom: 6,
-                            right: 20,
-                            child: Container(
-                              width: 158,
-                              height: 42,
-                              padding: const EdgeInsets.symmetric(vertical: 4),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(color: primaryColor, borderRadius: BorderRadius.circular(12)),
-                              child: Text(
-                                "Book Now",
-                                style: GoogleFonts.mitr(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 16),
-                              ),
-                            )),
-                      ],
-                    ),
-                  );
-                },
-                itemCount: appointmentList.length,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Treating Issues",
-                    style: GoogleFonts.mitr(color: primaryColor, fontWeight: FontWeight.w400, fontSize: 18),
-                  ),
-                  Text(
-                    "View all",
-                    style: GoogleFonts.mitr(color: primaryColor, fontWeight: FontWeight.w300, fontSize: 14),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 12),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SizedBox(
-                height: 102,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (ctx, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 16.0),
-                      child: Column(
-                        children: [
-                          Image.asset(issueList[index]['image']!, height: 55, width: 55, fit: BoxFit.cover),
-                          const SizedBox(height: 6),
-                          SizedBox(
-                            width: 60,
-                            child: Text(
-                              issueList[index]['title']!,
-                              textAlign: TextAlign.center,
-                              maxLines: 2,
-                              style: GoogleFonts.mitr(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14),
-                            ),
-                          )
-                        ],
+                  Image.asset("asset/Profile.png", height: 64, width: 56, fit: BoxFit.fill),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Pranav Shukla",
+                        style: GoogleFonts.lato(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 16),
                       ),
-                    );
-                  },
-                  itemCount: issueList.length,
-                ),
-              ),
-            ),
-            const SizedBox(height: 12),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Articles",
-                    style: GoogleFonts.mitr(color: primaryColor, fontWeight: FontWeight.w400, fontSize: 18),
-                  ),
-                  Text(
-                    "View all",
-                    style: GoogleFonts.mitr(color: primaryColor, fontWeight: FontWeight.w300, fontSize: 14),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 12),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (ctx, index) {
-                  return Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
-                    margin: const EdgeInsets.only(bottom: 8),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(18), color: primaryColor.withOpacity(0.05), border: Border.all(color: primaryColor)),
-                    child: Row(
-                      children: [
-                        Image.asset(articleList[index]['image'], height: 50, width: 50, fit: BoxFit.cover),
-                        const SizedBox(width: 12),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              articleList[index]['title']!,
-                              style: GoogleFonts.mitr(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            const SizedBox(height: 4),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 1.4 - 10,
-                              child: Text(
-                                articleList[index]['subtitle']!,
-                                maxLines: 3,
-                                style: GoogleFonts.mitr(color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 14),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
-                },
-                itemCount: articleList.length,
-              ),
-            ),
-            const SizedBox(height: 12),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Dhyaan Sadhana Sounds",
-                    style: GoogleFonts.mitr(color: primaryColor, fontWeight: FontWeight.w400, fontSize: 18),
-                  ),
-                  Text(
-                    "View all",
-                    style: GoogleFonts.mitr(color: primaryColor, fontWeight: FontWeight.w300, fontSize: 14),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 12),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SizedBox(
-                height: 170,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (ctx, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 16.0),
-                      child: Container(
-                        height: 167,
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                        decoration: BoxDecoration(color: primaryColor.withOpacity(0.05), borderRadius: BorderRadius.circular(12), border: Border.all(color: primaryColor)),
-                        child: Column(
-                          children: [
-                            Image.asset(soundList[index]['image']!, height: 98, width: 106, fit: BoxFit.cover),
-                            const SizedBox(height: 6),
-                            Text(
-                              soundList[index]['title']!,
-                              textAlign: TextAlign.center,
-                              maxLines: 2,
-                              style: GoogleFonts.mitr(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              soundList[index]['subtitle']!,
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.mitr(color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 12),
-                            )
-                          ],
-                        ),
+                      const SizedBox(height: 6),
+                      Text(
+                        "Joined February 2024",
+                        style: GoogleFonts.lato(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 12),
                       ),
-                    );
-                  },
-                  itemCount: soundList.length,
-                ),
+                    ],
+                  ),
+                  const Icon(Icons.arrow_forward_ios_outlined, size: 24, color: Colors.white)
+                ],
               ),
             ),
-            const SizedBox(height: 12),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Container(
-                width: double.maxFinite,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                // height: 172,
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color(0xffF79D25).withOpacity(0.1)),
+            Expanded(
+              child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        CircleAvatar(backgroundColor: secondaryColor.withOpacity(0.05), child: Icon(Icons.call, color: secondaryColor, size: 18)),
-                        const SizedBox(width: 8),
-                        Text(
-                          "Helpline",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.mitr(color: secondaryColor, fontWeight: FontWeight.w400, fontSize: 16),
-                        )
-                      ],
+                    SizedBox(
+                      height: 40,
+                      child: ListTile(
+                        dense: true,
+                        leading: Image.asset("asset/ahs.png", height: 24, width: 24),
+                        title: Text(
+                          "Ayush Health Services",
+                          style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14),
+                        ),
+                        trailing: const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 18),
+                      ),
+                    ),
+                    const Divider(height: 5),
+                    SizedBox(
+                      height: 40,
+                      child: ListTile(
+                        dense: true,
+                        leading: Image.asset("asset/card.png", height: 24, width: 24),
+                        title: Text(
+                          "ABHA Create & Login",
+                          style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14),
+                        ),
+                        trailing: const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 18),
+                      ),
+                    ),
+                    const Divider(height: 5),
+                    SizedBox(
+                      height: 40,
+                      child: ListTile(
+                        dense: true,
+                        leading: Image.asset("asset/arogya_mandir.png", height: 24, width: 24),
+                        title: Text(
+                          "Arogya Mandir Near Me",
+                          style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14),
+                        ),
+                        trailing: const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 18),
+                      ),
+                    ),
+                    const Divider(height: 5),
+                    SizedBox(
+                        height: 40,
+                        child: ListTile(
+                          dense: true,
+                          leading: Image.asset("asset/ayush.png", height: 24, width: 24),
+                          title: Text(
+                            "Ayush eVaidya",
+                            style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14),
+                          ),
+                          trailing: const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 18),
+                        )),
+                    const Divider(height: 5),
+                    SizedBox(
+                        height: 40,
+                        child: ListTile(
+                          dense: true,
+                          leading: Image.asset("asset/varta.png", height: 24, width: 24),
+                          title: Text(
+                            "Aarogya Varta",
+                            style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14),
+                          ),
+                          trailing: const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 18),
+                        )),
+                    const Divider(height: 5),
+                    SizedBox(
+                        height: 40,
+                        child: ListTile(
+                          dense: true,
+                          leading: Image.asset("asset/poshan.png", height: 24, width: 24),
+                          title: Text(
+                            "Ayush Poshan",
+                            style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14),
+                          ),
+                          trailing: const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 18),
+                        )),
+                    const Divider(height: 5),
+                    SizedBox(
+                        height: 40,
+                        child: ListTile(
+                          dense: true,
+                          leading: Image.asset("asset/yog_kutir.png", height: 24, width: 24),
+                          title: Text(
+                            "Yog kutir",
+                            style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14),
+                          ),
+                          trailing: const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 18),
+                        )),
+                    const Divider(height: 5),
+                    SizedBox(
+                        height: 40,
+                        child: ListTile(
+                          dense: true,
+                          leading: Image.asset("asset/swasthghar.png", height: 24, width: 24),
+                          title: Text(
+                            "Ayush Swasthghar",
+                            style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14),
+                          ),
+                          trailing: const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 18),
+                        )),
+                    const Divider(height: 5),
+                    SizedBox(
+                        height: 40,
+                        child: ListTile(
+                          dense: true,
+                          leading: Image.asset("asset/shishu_ahaar.png", height: 24, width: 24),
+                          title: Text(
+                            "Ayush Shishughar",
+                            style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14),
+                          ),
+                          trailing: const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 18),
+                        )),
+                    const Divider(height: 5),
+                    SizedBox(
+                        height: 40,
+                        child: ListTile(
+                          dense: true,
+                          leading: Image.asset("asset/appoint.png", height: 24, width: 24),
+                          title: Text(
+                            "My Appointments",
+                            style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14),
+                          ),
+                          trailing: const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 18),
+                        )),
+                    const Divider(height: 5),
+                    SizedBox(
+                        height: 40,
+                        child: ListTile(
+                          dense: true,
+                          leading: Image.asset("asset/settings.png", height: 24, width: 24),
+                          title: Text(
+                            "Settings",
+                            style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14),
+                          ),
+                          trailing: const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 18),
+                        )),
+                    const Divider(height: 5),
+                    SizedBox(
+                        height: 40,
+                        child: ListTile(
+                          dense: true,
+                          leading: Image.asset("asset/remove.png", height: 24, width: 24),
+                          title: Text(
+                            "Delete Account",
+                            style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14),
+                          ),
+                          trailing: const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 18),
+                        )),
+                    const Divider(height: 5),
+                    SizedBox(
+                        height: 40,
+                        child: ListTile(
+                          dense: true,
+                          leading: Image.asset("asset/logout.png", height: 24, width: 24),
+                          title: Text(
+                            "Log Out",
+                            style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14),
+                          ),
+                          trailing: const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 18),
+                        )),
+                    const Divider(height: 5),
+                    const SizedBox(height: 12),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          RichText(
+                            text: TextSpan(
+                              text: "Helpline - ",
+                              style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 12),
+                              children: [
+                                TextSpan(text: "1800-11-4477", style: GoogleFonts.lato(color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 12)),
+                              ],
+                            ),
+                          ),
+                          RichText(
+                            text: TextSpan(
+                              text: "Child Helpline - ",
+                              style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 12),
+                              children: [
+                                TextSpan(text: "1098", style: GoogleFonts.lato(color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 12)),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(height: 12),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "National Health Authority",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.mitr(color: Colors.black, fontWeight: FontWeight.w300, fontSize: 12),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                      child: RichText(
+                        text: TextSpan(
+                          text: "WhatsApp Helpdesk - ",
+                          style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 12),
+                          children: [
+                            TextSpan(text: " +91 9013151515", style: GoogleFonts.lato(color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 12)),
+                          ],
                         ),
-                        Text(
-                          "1800-11-4477",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.mitr(color: secondaryColor, fontWeight: FontWeight.w400, fontSize: 14),
-                        )
-                      ],
+                      ),
                     ),
                     const SizedBox(height: 12),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "MyGov Whatsapp Helpdesk",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.mitr(color: Colors.black, fontWeight: FontWeight.w300, fontSize: 12),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                      child: RichText(
+                        text: TextSpan(
+                          text: "Ayush Covid-19 Counselling - ",
+                          style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 12),
+                          children: [
+                            TextSpan(text: " 1800-11-4477", style: GoogleFonts.lato(color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 12)),
+                          ],
                         ),
-                        Text(
-                          "+91 9013151515",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.mitr(color: secondaryColor, fontWeight: FontWeight.w400, fontSize: 14),
-                        )
-                      ],
+                      ),
                     ),
-                    const SizedBox(height: 12),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Ayush Covid-19 Counselling",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.mitr(color: Colors.black, fontWeight: FontWeight.w300, fontSize: 12),
-                        ),
-                        Text(
-                          "14443",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.mitr(color: secondaryColor, fontWeight: FontWeight.w400, fontSize: 14),
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Child Helpline",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.mitr(color: Colors.black, fontWeight: FontWeight.w300, fontSize: 12),
-                        ),
-                        Text(
-                          "1098",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.mitr(color: secondaryColor, fontWeight: FontWeight.w400, fontSize: 14),
-                        )
-                      ],
-                    ),
+                    const SizedBox(height: 20),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      alignment: Alignment.center,
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(topRight: Radius.circular(14), topLeft: Radius.circular(14)),
+                          gradient: LinearGradient(colors: [Color(0xff3A63ED), Color(0xff085997)], begin: Alignment.centerLeft, end: Alignment.centerRight)),
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        "© 2024 Ayushman Bharat - PM Arogya Ayush App\n All right reserved.",
+                        style: GoogleFonts.lato(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 12),
+                      ),
+                    )
                   ],
                 ),
               ),
             ),
-            const SizedBox(height: 12),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-              decoration: BoxDecoration(borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12)), color: primaryColor),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SvgPicture.asset("asset/national_health.svg", height: 43, width: 88),
-                      const SizedBox(width: 18),
-                      Text(
-                        "PM Arogya Ayush App",
-                        style: GoogleFonts.mitr(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 18),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Image.asset("asset/Logo.png", height: 65, width: 88),
-                      const SizedBox(width: 18),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 1.8,
-                        child: Text(
-                          "Our Vision is to create healthier India by blending modern healthcare with Ayurvedic wisdom, ensuring seamless access for every citizen",
-                          style: GoogleFonts.mitr(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 14),
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
+          ],
+        ),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 330,
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 145,
+                      padding: const EdgeInsets.only(top: 12),
+                      alignment: Alignment.topLeft,
+                      decoration: const BoxDecoration(gradient: LinearGradient(colors: [Color(0xff3A63ED), Color(0xff085997)], begin: Alignment.centerLeft, end: Alignment.centerRight)),
+                      child: Row(
                         children: [
-                          const Icon(Icons.call, color: Colors.white, size: 18),
-                          const SizedBox(width: 8),
+                          IconButton(
+                              onPressed: () {
+                                _sKey.currentState?.openDrawer();
+                              },
+                              icon: const Icon(Icons.sort, color: Colors.white)),
                           Text(
-                            "1800-22-0000",
-                            style: GoogleFonts.mitr(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 14),
+                            "Welcome Pranav",
+                            style: GoogleFonts.lato(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 20),
+                          ),
+                          const Spacer(),
+                          Row(
+                            children: [
+                              const Icon(Icons.language, color: Colors.white),
+                              const SizedBox(width: 6),
+                              Text(
+                                "English",
+                                style: GoogleFonts.lato(decoration: TextDecoration.underline, decorationColor: Colors.white, color: Colors.white, fontWeight: FontWeight.w400, fontSize: 16),
+                              ),
+                              const SizedBox(width: 12),
+                            ],
                           )
                         ],
                       ),
-                      Row(
-                        children: [
-                          const Icon(Icons.email, color: Colors.white, size: 18),
-                          const SizedBox(width: 8),
-                          Text(
-                            "arogyaayush@xxx.xx",
-                            style: GoogleFonts.mitr(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 14),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ],
+                    ),
+                    Positioned(
+                      left: 15,
+                      right: 16,
+                      top: 100,
+                      child: buildMyProfileCard(),
+                    )
+                  ],
+                ),
               ),
-            )
-          ],
+              Container(height: 12, width: double.maxFinite, color: Colors.grey.withOpacity(0.2)),
+              SizedBox(
+                  width: double.maxFinite,
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "My Appointments",
+                              style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 16),
+                            ),
+                            Text(
+                              "View all",
+                              style: GoogleFonts.lato(color: const Color(0xff3A63ED), fontWeight: FontWeight.w700, fontSize: 14),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                        RichText(
+                          text: TextSpan(
+                            text: "You have ",
+                            style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 16),
+                            children: [
+                              TextSpan(text: "3 upcoming appointments", style: GoogleFonts.lato(color: const Color(0xff3A63ED), fontWeight: FontWeight.w600, fontSize: 16)),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        SizedBox(
+                          height: 171,
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (ctx, index) {
+                              return Container(
+                                height: 161,
+                                width: 187,
+                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                                margin: const EdgeInsets.only(right: 12),
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(6), border: Border.all(color: const Color(0xffC2CFF9))),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Image.asset("asset/appointment.png", height: 44, width: 44, fit: BoxFit.fill),
+                                    const SizedBox(height: 6),
+                                    Text(
+                                      "Dr.Shripad Joshi",
+                                      style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 14),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      "General Consultation",
+                                      style: GoogleFonts.lato(color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 12),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Row(
+                                      children: [
+                                        const Icon(Icons.calendar_month, color: Colors.grey, size: 18),
+                                        const SizedBox(width: 6),
+                                        Text(
+                                          "Tue, Feb 4",
+                                          style: GoogleFonts.lato(color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 12),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Row(
+                                      children: [
+                                        const Icon(Icons.access_time_filled_rounded, color: Colors.grey, size: 18),
+                                        const SizedBox(width: 6),
+                                        Text(
+                                          "5:30 PM - 7:00 PM",
+                                          style: GoogleFonts.lato(color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 12),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                            itemCount: appointmentList.length,
+                          ),
+                        )
+                      ]))),
+              Container(height: 12, width: double.maxFinite, color: Colors.grey.withOpacity(0.2)),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Treating Issues",
+                      style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 16),
+                    ),
+                    Text(
+                      "View all",
+                      style: GoogleFonts.lato(color: const Color(0xff3A63ED), fontWeight: FontWeight.w700, fontSize: 16),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: SizedBox(
+                  height: 120,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (ctx, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 16.0),
+                        child: Column(
+                          children: [
+                            Image.asset(issueList[index]['image']!, height: 55, width: 55, fit: BoxFit.cover),
+                            const SizedBox(height: 6),
+                            SizedBox(
+                              width: 60,
+                              child: Text(
+                                issueList[index]['title']!,
+                                textAlign: TextAlign.center,
+                                maxLines: 2,
+                                style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14),
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                          ],
+                        ),
+                      );
+                    },
+                    itemCount: issueList.length,
+                  ),
+                ),
+              ),
+              Container(height: 12, width: double.maxFinite, color: Colors.grey.withOpacity(0.2)),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Stay informed with latest articles",
+                      style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 16),
+                    ),
+                    Text(
+                      "View all",
+                      style: GoogleFonts.lato(color: const Color(0xff3A63ED), fontWeight: FontWeight.w700, fontSize: 16),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: 200,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (ctx, index) {
+                    return Container(
+                      height: 197,
+                      width: 187,
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                      margin: const EdgeInsets.only(right: 12),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(6), border: Border.all(color: const Color(0xffC2CFF9))),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Image.asset("asset/new_article.png", height: 77, width: 163, fit: BoxFit.fill),
+                          Text(
+                            "New Ayurvedic Medicine Shows Promising Results for Stress Relief",
+                            style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 14),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "VIE stories",
+                                style: GoogleFonts.lato(color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 12),
+                              ),
+                              Text(
+                                "1d ago",
+                                style: GoogleFonts.lato(color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 12),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  itemCount: 4,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Container(height: 12, width: double.maxFinite, color: Colors.grey.withOpacity(0.2)),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Listen to calming mindfulness music",
+                      style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 16),
+                    ),
+                    Text(
+                      "View all",
+                      style: GoogleFonts.lato(color: const Color(0xff3A63ED), fontWeight: FontWeight.w700, fontSize: 16),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: SizedBox(
+                  height: 170,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (ctx, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 16.0),
+                        child: Container(
+                          height: 167,
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                          decoration: BoxDecoration(color: primaryColor.withOpacity(0.05), borderRadius: BorderRadius.circular(12), border: Border.all(color: primaryColor)),
+                          child: Column(
+                            children: [
+                              Image.asset(soundList[index]['image']!, height: 98, width: 106, fit: BoxFit.cover),
+                              const SizedBox(height: 6),
+                              Text(
+                                soundList[index]['title']!,
+                                textAlign: TextAlign.center,
+                                maxLines: 2,
+                                style: GoogleFonts.mitr(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 14),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                soundList[index]['subtitle']!,
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.mitr(color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 12),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                    itemCount: soundList.length,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
+            ],
+          ),
         ),
       ),
     );
@@ -541,53 +670,41 @@ class _HomeScreenState extends State<HomeScreen> {
       child: GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 16, crossAxisSpacing: 10, childAspectRatio: 1.6),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 16, crossAxisSpacing: 8, childAspectRatio: 1.6),
           itemCount: myProfileList.length,
           itemBuilder: (ctx, index) {
-            return Stack(
-              children: [
-                Container(
-                  height: 90,
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(18), border: Border.all(color: myProfileList[index]['color'])),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+            return Container(
+              height: 108,
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(6), color: Colors.white, border: Border.all(color: myProfileList[index]['color'])),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  index == 0
+                      ? Image.asset(myProfileList[index]['image'], height: 40, width: 40, fit: BoxFit.fill)
+                      : CircleAvatar(backgroundColor: const Color(0xffEBEFFD), child: Image.asset(myProfileList[index]['image'], height: 35, width: 35, fit: BoxFit.contain)),
+                  const SizedBox(width: 6),
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: Text(
-                          myProfileList[index]['title'],
-                          style: GoogleFonts.mitr(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 16),
-                        ),
+                      Text(
+                        myProfileList[index]['title'],
+                        style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 12),
                       ),
-                      SvgPicture.asset(myProfileList[index]['image'], height: 30, width: 30, fit: BoxFit.cover)
+                      Text(
+                        myProfileList[index]['time'],
+                        style: GoogleFonts.lato(color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 12),
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        index == 0 ? "View Profile" : "Update Info",
+                        style: GoogleFonts.lato(color: const Color(0xff3A63ED), fontWeight: FontWeight.w700, fontSize: 14),
+                      ),
                     ],
                   ),
-                ),
-                Positioned(
-                    bottom: 0,
-                    left: 40,
-                    right: 40,
-                    child: Container(
-                      width: 60,
-                      height: 24,
-                      padding: const EdgeInsets.symmetric(vertical: 4),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(color: const Color(0xffE7F7FA), borderRadius: BorderRadius.circular(12)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Fill",
-                            style: GoogleFonts.mitr(color: myProfileList[index]['titleColor'], fontWeight: FontWeight.w400, fontSize: 12),
-                          ),
-                          const SizedBox(width: 4),
-                          Icon(Icons.arrow_forward, color: myProfileList[index]['titleColor'], size: 14)
-                        ],
-                      ),
-                    )),
-              ],
+                ],
+              ),
             );
           }),
     );
