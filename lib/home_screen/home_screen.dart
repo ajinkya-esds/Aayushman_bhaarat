@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../questionarrie/lifestyle_questionarrie.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -666,14 +668,19 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget buildMyProfileCard() {
-    return Container(
-      child: GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 16, crossAxisSpacing: 8, childAspectRatio: 1.6),
-          itemCount: myProfileList.length,
-          itemBuilder: (ctx, index) {
-            return Container(
+    return GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 16, crossAxisSpacing: 8, childAspectRatio: 1.6),
+        itemCount: myProfileList.length,
+        itemBuilder: (ctx, index) {
+          return GestureDetector(
+            onTap: () {
+              if (index == 3) {
+                Navigator.push(context, MaterialPageRoute(builder: (ctx) => const LifestyleQuestion()));
+              }
+            },
+            child: Container(
               height: 108,
               padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(6), color: Colors.white, border: Border.all(color: myProfileList[index]['color'])),
@@ -705,8 +712,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-            );
-          }),
-    );
+            ),
+          );
+        });
   }
 }

@@ -28,8 +28,10 @@ class _LanguageScreenState extends State<LanguageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
+        backgroundColor: Colors.white,
         // leading: IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_back_ios_new, size: 20)),
         title: Text(
           "Select Language",
@@ -58,9 +60,9 @@ class _LanguageScreenState extends State<LanguageScreen> {
               Expanded(
                 child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 8, mainAxisSpacing: 2, childAspectRatio: 1.4),
-                  itemCount: languageList.length, // Number of items
+                  itemCount: languageList.length,
                   itemBuilder: (context, index) {
-                    return InkWell(
+                    return GestureDetector(
                         onTap: () {
                           selectedLanguage = languageList[index]['title']!;
                           setState(() {});
@@ -98,7 +100,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
               ),
             ],
           )),
-      bottomNavigationBar: InkWell(
+      bottomNavigationBar: GestureDetector(
         onTap: () {
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx) => const WelcomeScreen()));
         },
