@@ -25,173 +25,186 @@ class _QuestionListState extends State<QuestionList> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          const SizedBox(height: 12),
-          Padding(
-              padding: const EdgeInsets.only(left: 6.0, top: 12, right: 16),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        if (pageNumber == 0) {
-                          Navigator.pop(context);
-                        } else {
-                          setState(() {
-                            pageNumber -= 1;
-                          });
-                        }
-                      },
-                      icon: const Icon(Icons.arrow_back, color: Colors.black)),
-                  Expanded(
-                      child: CustomProgressBar(
-                          progress: pageNumber == 0
-                              ? 0.2
-                              : pageNumber == 1
-                                  ? 0.35
-                                  : pageNumber == 2
-                                      ? 0.45
-                                      : pageNumber == 3
-                                          ? 0.58
-                                          : pageNumber == 4
-                                              ? 0.70
-                                              : pageNumber == 5
-                                                  ? 0.82
-                                                  : pageNumber == 6
-                                                      ? 0.94
-                                                      : pageNumber == 7
-                                                          ? 1.1
-                                                          : pageNumber == 8
-                                                              ? 2
-                                                              : 0)),
-                ],
-              )),
-          const SizedBox(height: 12),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Image.asset("asset/question2.png", height: 114, width: 49, fit: BoxFit.fill),
-                Stack(
-                  clipBehavior: Clip.none,
+    return WillPopScope(
+      onWillPop: () {
+        if (pageNumber == 0) {
+          Navigator.pop(context);
+          return Future.value(true);
+        } else {
+          setState(() {
+            pageNumber -= 1;
+          });
+          return Future.value(false);
+        }
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(height: 12),
+            Padding(
+                padding: const EdgeInsets.only(left: 6.0, top: 12, right: 16),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    // Chat Bubble
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(color: const Color(0xffEBEFFD), borderRadius: BorderRadius.circular(12)),
-                      child: Text(
-                        pageNumber == 0
-                            ? "How active are you in daily life?"
-                            : pageNumber == 1
-                                ? "What are your dietary preferences?"
-                                : pageNumber == 2
-                                    ? "How often do you consume alcohol?"
-                                    : pageNumber == 3
-                                        ? "Do you smoke?"
-                                        : pageNumber == 4
-                                            ? "How many hours of sleep do you\nusually get?"
-                                            : pageNumber == 5
-                                                ? "How would you describe your stress\nlevels?"
-                                                : pageNumber == 6
-                                                    ? "How often do you consume caffeine\n(tea/coffee/energy drinks)?"
-                                                    : pageNumber == 7
-                                                        ? "Have you experienced any mental\nhealth concerns?"
-                                                        : pageNumber == 8
-                                                            ? "What are your hobbies and interests?"
-                                                            : "",
-                        style: GoogleFonts.lato(color: const Color(0xff484848), fontWeight: FontWeight.w400, fontSize: 14),
-                      ),
-                    ),
-                    // Triangle Arrow (Using Positioned)
-                    Positioned(
-                      left: -8, // Adjust position
-                      top: 10,
-                      child: CustomPaint(painter: ChatBubbleTriangle(const Color(0xffEBEFFD))),
-                    ),
+                    IconButton(
+                        onPressed: () {
+                          if (pageNumber == 0) {
+                            Navigator.pop(context);
+                          } else {
+                            setState(() {
+                              pageNumber -= 1;
+                            });
+                          }
+                        },
+                        icon: const Icon(Icons.arrow_back, color: Colors.black)),
+                    Expanded(
+                        child: CustomProgressBar(
+                            progress: pageNumber == 0
+                                ? 0.2
+                                : pageNumber == 1
+                                    ? 0.35
+                                    : pageNumber == 2
+                                        ? 0.45
+                                        : pageNumber == 3
+                                            ? 0.58
+                                            : pageNumber == 4
+                                                ? 0.70
+                                                : pageNumber == 5
+                                                    ? 0.82
+                                                    : pageNumber == 6
+                                                        ? 0.94
+                                                        : pageNumber == 7
+                                                            ? 1.1
+                                                            : pageNumber == 8
+                                                                ? 2
+                                                                : 0)),
                   ],
-                )
-              ],
+                )),
+            const SizedBox(height: 12),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Image.asset("asset/question2.png", height: 114, width: 49, fit: BoxFit.fill),
+                  Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      // Chat Bubble
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(color: const Color(0xffEBEFFD), borderRadius: BorderRadius.circular(12)),
+                        child: Text(
+                          pageNumber == 0
+                              ? "How active are you in daily life?"
+                              : pageNumber == 1
+                                  ? "What are your dietary preferences?"
+                                  : pageNumber == 2
+                                      ? "How often do you consume alcohol?"
+                                      : pageNumber == 3
+                                          ? "Do you smoke?"
+                                          : pageNumber == 4
+                                              ? "How many hours of sleep do you\nusually get?"
+                                              : pageNumber == 5
+                                                  ? "How would you describe your stress\nlevels?"
+                                                  : pageNumber == 6
+                                                      ? "How often do you consume caffeine\n(tea/coffee/energy drinks)?"
+                                                      : pageNumber == 7
+                                                          ? "Have you experienced any mental\nhealth concerns?"
+                                                          : pageNumber == 8
+                                                              ? "What are your hobbies and interests?"
+                                                              : "",
+                          style: GoogleFonts.lato(color: const Color(0xff484848), fontWeight: FontWeight.w400, fontSize: 14),
+                        ),
+                      ),
+                      // Triangle Arrow (Using Positioned)
+                      Positioned(
+                        left: -8, // Adjust position
+                        top: 10,
+                        child: CustomPaint(painter: ChatBubbleTriangle(const Color(0xffEBEFFD))),
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
-          ),
-          const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: QuestionWidget(
-              details: pageNumber == 0
-                  ? questionList
-                  : pageNumber == 1
-                      ? preferences
-                      : pageNumber == 2
-                          ? preferences1
-                          : pageNumber == 3
-                              ? preferences1
-                              : pageNumber == 4
-                                  ? questionList1
-                                  : pageNumber == 5
-                                      ? questionList2
-                                      : pageNumber == 6
-                                          ? preferences1
-                                          : pageNumber == 7
-                                              ? preferences3
-                                              : preferences1,
-              selected: selectedQuestion,
-              pageIndex: selectedIndex,
-              state: (value) => setState(() {
-                if (value is int) {
-                  selectedIndex = value;
-                } else if (value is String) {
-                  selectedQuestion = value;
-                }
-              }),
-              isUI: pageNumber == 0
-                  ? 'list'
-                  : pageNumber == 1
-                      ? 'checkbox'
-                      : pageNumber == 2
-                          ? 'radio'
-                          : pageNumber == 3
-                              ? 'radio'
-                              : pageNumber == 4
-                                  ? 'list'
-                                  : pageNumber == 5
-                                      ? 'list'
-                                      : pageNumber == 6
-                                          ? 'radio'
-                                          : pageNumber == 7
-                                              ? 'checkbox'
-                                              : pageNumber == 8
-                                                  ? 'field'
-                                                  : '',
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: QuestionWidget(
+                details: pageNumber == 0
+                    ? questionList
+                    : pageNumber == 1
+                        ? preferences
+                        : pageNumber == 2
+                            ? preferences1
+                            : pageNumber == 3
+                                ? preferences1
+                                : pageNumber == 4
+                                    ? questionList1
+                                    : pageNumber == 5
+                                        ? questionList2
+                                        : pageNumber == 6
+                                            ? preferences1
+                                            : pageNumber == 7
+                                                ? preferences3
+                                                : preferences1,
+                selected: selectedQuestion,
+                pageIndex: selectedIndex,
+                state: (value) => setState(() {
+                  if (value is int) {
+                    selectedIndex = value;
+                  } else if (value is String) {
+                    selectedQuestion = value;
+                  }
+                }),
+                isUI: pageNumber == 0
+                    ? 'list'
+                    : pageNumber == 1
+                        ? 'checkbox'
+                        : pageNumber == 2
+                            ? 'radio'
+                            : pageNumber == 3
+                                ? 'radio'
+                                : pageNumber == 4
+                                    ? 'list'
+                                    : pageNumber == 5
+                                        ? 'list'
+                                        : pageNumber == 6
+                                            ? 'radio'
+                                            : pageNumber == 7
+                                                ? 'checkbox'
+                                                : pageNumber == 8
+                                                    ? 'field'
+                                                    : '',
+              ),
+            )
+          ],
+        ),
+        bottomNavigationBar: GestureDetector(
+          onTap: () {
+            if (pageNumber == 8) {
+              Navigator.push(context, MaterialPageRoute(builder: (ctx) => const QuestionComplete()));
+            } else {
+              setState(() {
+                selectedIndex = -1;
+                selectedQuestion = "";
+                pageNumber += 1;
+              });
+            }
+          },
+          child: Container(
+            height: 52,
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20), gradient: const LinearGradient(colors: [Color(0xff3A63ED), Color(0xff085997)], begin: Alignment.centerLeft, end: Alignment.centerRight)),
+            child: Text(
+              "Continue",
+              style: GoogleFonts.lato(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 16),
             ),
-          )
-        ],
-      ),
-      bottomNavigationBar: GestureDetector(
-        onTap: () {
-          if (pageNumber == 8) {
-            Navigator.push(context, MaterialPageRoute(builder: (ctx) => const QuestionComplete()));
-          } else {
-            setState(() {
-              selectedIndex = -1;
-              selectedQuestion = "";
-              pageNumber += 1;
-            });
-          }
-        },
-        child: Container(
-          height: 52,
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20), gradient: const LinearGradient(colors: [Color(0xff3A63ED), Color(0xff085997)], begin: Alignment.centerLeft, end: Alignment.centerRight)),
-          child: Text(
-            "Continue",
-            style: GoogleFonts.lato(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 16),
           ),
         ),
       ),
