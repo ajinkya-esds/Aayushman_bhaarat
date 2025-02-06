@@ -22,13 +22,12 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   List<Map<String, dynamic>> appointmentList = [
-    {"title": "E-Vaidya", "image": "asset/evaidya.png"},
-    {"title": "Aarogya Varta", "image": "asset/aarogya_varta.png"}
+    {"name": "Dr. Shripad Joshi", "post": "General Consultation", "date": "Tue, Feb 4", "time": "5:30 PM - 7:00 PM", "image": "asset/appointment.png"},
+    {"name": "Dr. Neha Malhotra", "post": "General Consultation", "date": "Tue, Feb 4", "time": "5:30 PM - 7:00 PM", "image": "asset/appointment2.png"},
   ];
   List<Map<String, dynamic>> articleList = [
-    {"title": "Regional", "subtitle": "Kerala Promotes Ayurveda with Free Health Camps for local Communities", "image": "asset/article1.png"},
-    {"title": "National", "subtitle": "ABHA: Transforming healthcare for 1.4 Billion citizens.", "image": "asset/article2.png"},
-    {"title": "International", "subtitle": "Virus Detected: Research Report submitted to Health Cell.", "image": "asset/article3.png"}
+    {"title": "New Ayurvedic Medicine Shows Promising Results for Stress Relief", "time": "1d ago", "source": "VIE stories", "image": "asset/new_article.png"},
+    {"title": "Ayurveda’s Role in Managing Chronic Diseases Gains Global Recognition", "time": "2d ago", "source": "Tv9 stories", "image": "asset/article2.png"},
   ];
   List<Map<String, dynamic>> soundList = [
     {"title": "Cosmic Harmony", "subtitle": "(Space Inspired)", "image": "asset/sound1.png"},
@@ -455,15 +454,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Image.asset("asset/appointment.png", height: 44, width: 44, fit: BoxFit.fill),
+                                    Image.asset(appointmentList[index]['image'] ?? "", height: 44, width: 44, fit: BoxFit.fill),
                                     const SizedBox(height: 6),
                                     Text(
-                                      "Dr.Shripad Joshi",
+                                      appointmentList[index]['name'] ?? "",
                                       style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 14),
                                     ),
                                     const SizedBox(height: 8),
                                     Text(
-                                      "General Consultation",
+                                      appointmentList[index]['post'] ?? "",
                                       style: GoogleFonts.lato(color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 12),
                                     ),
                                     const SizedBox(height: 4),
@@ -472,7 +471,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         const Icon(Icons.calendar_month, color: Colors.grey, size: 18),
                                         const SizedBox(width: 6),
                                         Text(
-                                          "Tue, Feb 4",
+                                          appointmentList[index]['date'] ?? "",
                                           style: GoogleFonts.lato(color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 12),
                                         ),
                                       ],
@@ -483,7 +482,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         const Icon(Icons.access_time_filled_rounded, color: Colors.grey, size: 18),
                                         const SizedBox(width: 6),
                                         Text(
-                                          "5:30 PM - 7:00 PM",
+                                          appointmentList[index]['time'] ?? "",
                                           style: GoogleFonts.lato(color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 12),
                                         ),
                                       ],
@@ -578,20 +577,20 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Image.asset("asset/new_article.png", height: 77, width: 163, fit: BoxFit.fill),
+                          Image.asset(articleList[index]['image'] ?? "", height: 77, width: 163, fit: BoxFit.fill),
                           Text(
-                            "New Ayurvedic Medicine Shows Promising Results for Stress Relief",
+                            articleList[index]['title'] ?? "",
                             style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 14),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "VIE stories",
+                                articleList[index]['source'] ?? "",
                                 style: GoogleFonts.lato(color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 12),
                               ),
                               Text(
-                                "1d ago",
+                                articleList[index]['time'] ?? "",
                                 style: GoogleFonts.lato(color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 12),
                               ),
                             ],
@@ -600,7 +599,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   },
-                  itemCount: 4,
+                  itemCount: articleList.length,
                 ),
               ),
               const SizedBox(height: 12),
