@@ -1,3 +1,4 @@
+import 'package:aayushman_bhaarat/medical_profile/medical_profile.dart';
 import 'package:aayushman_bhaarat/utils/color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -369,6 +370,8 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () {
               if (index == 3) {
                 Navigator.push(context, MaterialPageRoute(builder: (ctx) => const LifestyleQuestion()));
+              }if (index == 1){
+                Navigator.push(context, MaterialPageRoute(builder: (ctx) => const MedicalProfile()));
               }
             },
             child: Container(

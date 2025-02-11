@@ -1,3 +1,4 @@
+import 'package:aayushman_bhaarat/bhashini/bhashini_result.dart';
 import 'package:aayushman_bhaarat/utils/bottombar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,21 +38,26 @@ class _BhashiniListenState extends State<BhashiniListen> {
             ),
           ),
           const SizedBox(height: 30),
-          Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            margin: const EdgeInsets.only(bottom: 8, left: 16, right: 16),
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), gradient: const LinearGradient(colors: [Color(0xff3A63ED), Color(0xff085997)])),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.graphic_eq, color: Colors.white, size: 24),
-                const SizedBox(width: 6),
-                Text(
-                  "Analyzing",
-                  style: GoogleFonts.lato(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 16),
-                ),
-              ],
+          InkWell(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BhashiniResult()));
+            },
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              margin: const EdgeInsets.only(bottom: 8, left: 16, right: 16),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), gradient: const LinearGradient(colors: [Color(0xff3A63ED), Color(0xff085997)])),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.graphic_eq, color: Colors.white, size: 24),
+                  const SizedBox(width: 6),
+                  Text(
+                    "Analyzing",
+                    style: GoogleFonts.lato(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 16),
+                  ),
+                ],
+              ),
             ),
           ),
           const SizedBox(height: 50),
