@@ -1,3 +1,4 @@
+import 'package:aayushman_bhaarat/bhashini/bhashini_screeen.dart';
 import 'package:aayushman_bhaarat/medical_profile/medical_profile.dart';
 import 'package:aayushman_bhaarat/utils/color_scheme.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +54,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       key: _sKey,
       bottomNavigationBar: BottombarWidget(),
+      floatingActionButton: GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BhashiniScreeen()));
+          },
+          child: Image.asset("asset/TaptoSpeak.png", height: 58, width: 58)),
       drawer: const DrawerWidget(),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -102,6 +108,156 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "My Health Stats",
+                      style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 16),
+                    ),
+                    Text(
+                      "View Report",
+                      style: GoogleFonts.lato(color: const Color(0xff3A63ED), fontWeight: FontWeight.w700, fontSize: 14),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16),
+                height: 40,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Image.asset("asset/lifestyle.png", height: 20, width: 20, color: const Color(0xff3A63ED), fit: BoxFit.fill),
+                    const SizedBox(width: 10),
+                    buildProgressBar(true),
+                    const SizedBox(width: 5),
+                    buildProgressBar(true),
+                    const SizedBox(width: 5),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        buildProgressBar(true),
+                        Text(
+                          "Active",
+                          style: GoogleFonts.lato(color: const Color(0xff3A63ED), fontWeight: FontWeight.w400, fontSize: 12),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 10),
+                    Text(
+                      "Lifestyle",
+                      style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 12),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16),
+                height: 40,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Image.asset("asset/heart_rate.png", height: 20, width: 20, color: const Color(0xff3A63ED), fit: BoxFit.fill),
+                    const SizedBox(width: 10),
+                    buildProgressBar(true),
+                    const SizedBox(width: 5),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        buildProgressBar(true),
+                        Text(
+                          "Good",
+                          style: GoogleFonts.lato(color: const Color(0xff3A63ED), fontWeight: FontWeight.w400, fontSize: 12),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 5),
+                    buildProgressBar(false),
+                    const SizedBox(width: 10),
+                    Flexible(
+                      child: Text(
+                        "Heart Rate",
+                        style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 12),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16),
+                height: 40,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Image.asset("asset/sleep.png", height: 20, width: 20, color: const Color(0xff3A63ED)),
+                    const SizedBox(width: 10),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        buildProgressBar(true),
+                        Text(
+                          "Poor",
+                          style: GoogleFonts.lato(color: const Color(0xff3A63ED), fontWeight: FontWeight.w400, fontSize: 12),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 5),
+                    buildProgressBar(false),
+                    const SizedBox(width: 5),
+                    buildProgressBar(false),
+                    const SizedBox(width: 10),
+                    Flexible(
+                      child: Text(
+                        "Sleep Cycle",
+                        style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 12),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16),
+                height: 40,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Image.asset("asset/weight.png", height: 20, width: 20, color: const Color(0xff3A63ED), fit: BoxFit.fill),
+                    const SizedBox(width: 10),
+                    buildProgressBar(true),
+                    const SizedBox(width: 5),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        buildProgressBar(true),
+                        Text(
+                          "Average",
+                          style: GoogleFonts.lato(color: const Color(0xff3A63ED), fontWeight: FontWeight.w400, fontSize: 12),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 5),
+                    buildProgressBar(false),
+                    const SizedBox(width: 10),
+                    Text(
+                      "Weight",
+                      style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w400, fontSize: 12),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
               Container(height: 12, width: double.maxFinite, color: Colors.grey.withOpacity(0.2)),
               SizedBox(
                   width: double.maxFinite,
@@ -359,6 +515,17 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Widget buildProgressBar(bool filled) {
+    return Container(
+      height: 8,
+      width: 70,
+      decoration: BoxDecoration(
+        color: filled ? const Color(0xff3A63ED) : const Color(0xff3A63ED).withOpacity(0.2),
+        borderRadius: BorderRadius.circular(10),
+      ),
+    );
+  }
+
   Widget buildMyProfileCard() {
     return GridView.builder(
         shrinkWrap: true,
@@ -370,7 +537,8 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () {
               if (index == 3) {
                 Navigator.push(context, MaterialPageRoute(builder: (ctx) => const LifestyleQuestion()));
-              }if (index == 1){
+              }
+              if (index == 1) {
                 Navigator.push(context, MaterialPageRoute(builder: (ctx) => const MedicalProfile()));
               }
             },
