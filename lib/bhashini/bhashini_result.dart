@@ -6,7 +6,9 @@ import '../utils/bottombar_widget.dart';
 import '../utils/drawer_widget.dart';
 
 class BhashiniResult extends StatefulWidget {
-  const BhashiniResult({super.key});
+  final String searchResult;
+
+  const BhashiniResult({super.key, required this.searchResult});
 
   @override
   State<BhashiniResult> createState() => _BhashiniResultState();
@@ -51,7 +53,9 @@ class _BhashiniResultState extends State<BhashiniResult> {
         child: Column(
           children: [
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+              },
               child: Container(
                 alignment: Alignment.center,
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -81,15 +85,7 @@ class _BhashiniResultState extends State<BhashiniResult> {
         padding: const EdgeInsets.all(12),
         child: Column(
           children: [
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Results for Home remedies for cough and cold",
-                style: TextStyle(
-                  fontSize: 14,
-                ),
-              ),
-            ),
+            Align(alignment: Alignment.centerLeft, child: Text("Result For ${widget.searchResult}", style: GoogleFonts.lato(fontSize: 14))),
             const SizedBox(height: 10),
             ...remedies.map((remedy) => _buildRemedyCard(remedy)).toList(),
             const SizedBox(height: 20),
@@ -105,20 +101,15 @@ class _BhashiniResultState extends State<BhashiniResult> {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), border: Border.all(color: Colors.grey)),
       child: ExpansionTile(
         initiallyExpanded: true,
-        title: Text(remedy["title"], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8), // Apply rounded corners
-        ),
+        title: Text(remedy["title"], style: GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 16)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         childrenPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
         children: [
-          Text(remedy["description"], style: const TextStyle(fontSize: 14, color: Colors.black87)),
+          Text(remedy["description"], style: GoogleFonts.lato(fontSize: 14, color: Colors.black87)),
           const SizedBox(height: 10),
-          const Align(
+          Align(
             alignment: Alignment.centerLeft,
-            child: Text("Usages",
-                style: TextStyle(
-                  color: Color(0xff3A63ED),
-                )),
+            child: Text("Usages", style: GoogleFonts.lato(color: Color(0xff3A63ED))),
           ),
           const SizedBox(height: 5),
           _buildUsageTimeline(remedy["usages"]),

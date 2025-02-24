@@ -39,8 +39,8 @@ class _BhashiniListenState extends State<BhashiniListen> {
           ),
           const SizedBox(height: 30),
           InkWell(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BhashiniResult()));
+            onTap: () {
+              // Navigator.push(context, MaterialPageRoute(builder: (ctx) =>  BhashiniResult()));
             },
             child: Container(
               alignment: Alignment.center,

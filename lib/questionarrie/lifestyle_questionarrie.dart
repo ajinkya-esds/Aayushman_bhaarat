@@ -23,7 +23,7 @@ class _LifestyleQuestionState extends State<LifestyleQuestion> {
               icon: const Icon(Icons.arrow_back, color: Colors.black)),
           title: Text(
             textAlign: TextAlign.center,
-            "Lifestyle Questioner",
+            "Lifestyle Questionnaire",
             style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 24),
           )),
       body: Column(

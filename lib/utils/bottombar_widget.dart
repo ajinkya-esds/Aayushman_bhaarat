@@ -30,7 +30,12 @@ class BottombarWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
-                      onTap: () => selectedIndex.value = 0,
+                      onTap: () {
+                        selectedIndex.value = 0;
+                        if (page == 0) {
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx) => const HomeScreen()));
+                        }
+                      },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [

@@ -4,6 +4,7 @@ import 'package:aayushman_bhaarat/utils/color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../medical_report/medical_report.dart';
 import '../questionarrie/lifestyle_questionarrie.dart';
 import '../utils/bottombar_widget.dart';
 import '../utils/drawer_widget.dart';
@@ -55,8 +56,12 @@ class _HomeScreenState extends State<HomeScreen> {
       key: _sKey,
       bottomNavigationBar: BottombarWidget(),
       floatingActionButton: GestureDetector(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (ctx) => const BhashiniScreeen()));
+          onTap: () async {
+            selectedIndex.value = -3;
+            final result = await Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx) => const BhashiniScreeen()));
+            if (result != null) {
+              selectedIndex.value = 0;
+            }
           },
           child: Image.asset("asset/TaptoSpeak.png", height: 58, width: 58)),
       drawer: const DrawerWidget(),
@@ -117,9 +122,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       "My Health Stats",
                       style: GoogleFonts.lato(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 16),
                     ),
-                    Text(
-                      "View Report",
-                      style: GoogleFonts.lato(color: const Color(0xff3A63ED), fontWeight: FontWeight.w700, fontSize: 14),
+                    GestureDetector(
+                      onTap: () async {
+                        selectedIndex.value = -3;
+                        final result = await Navigator.push(context, MaterialPageRoute(builder: (ctx) => const MedicalReportScreen()));
+                        if (result != null) {
+                          selectedIndex.value = 0;
+                        }
+                      },
+                      child: Text(
+                        "View Report",
+                        style: GoogleFonts.lato(color: const Color(0xff3A63ED), fontWeight: FontWeight.w700, fontSize: 14),
+                      ),
                     ),
                   ],
                 ),
