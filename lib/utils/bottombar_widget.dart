@@ -31,8 +31,9 @@ class BottombarWidget extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        selectedIndex.value = 0;
-                        if (page == 0) {
+                        print(page);
+                        if (page != 0) {
+                          selectedIndex.value = 0;
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx) => const HomeScreen()));
                         }
                       },

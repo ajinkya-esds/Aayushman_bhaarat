@@ -1,0 +1,2 @@
+D:/project/Aayushman_bhaarat/android/app/.cxx/Debug/4h3bb5c5/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/project/Aayushman_bhaarat/android/app/.cxx/Debug/4h3bb5c5/arm64-v8a/CMakeFiles/rebuild_cache.dir

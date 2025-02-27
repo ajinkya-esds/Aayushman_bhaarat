@@ -176,9 +176,10 @@ class _QuestionListState extends State<QuestionList> {
                                             ? 'radio'
                                             : pageNumber == 7
                                                 ? 'checkbox'
-                                                : pageNumber == 8
+                                                : /*pageNumber == 8
                                                     ? 'field'
-                                                    : '',
+                                                    : */
+                                                '',
               ),
             )
           ],
@@ -325,7 +326,7 @@ class QuestionWidget extends StatelessWidget {
                     },
                     itemCount: listValue.length,
                   )
-                : isUI == 'field'
+                : /*isUI == 'field'
                     ? Container(
                         height: 293,
                         margin: const EdgeInsets.only(bottom: 6),
@@ -337,6 +338,7 @@ class QuestionWidget extends StatelessWidget {
                               hintText: "Tell us about your favourite things to do!",
                               border: InputBorder.none),
                         ))
-                    : Container();
+                    : */
+                Container();
   }
 }

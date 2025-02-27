@@ -20,6 +20,7 @@ class _BhashiniScreenState extends State<BhashiniScreeen> {
   String _text = "Share your concern with us! We're here to listen, support, and help you with any questions or issues you may have. Your well-being is our priority.";
   bool _speechAvailable = false;
   final GlobalKey<ScaffoldState> _sKey = GlobalKey();
+  List<stt.LocaleName>? locales;
 
   @override
   void initState() {
@@ -32,23 +33,30 @@ class _BhashiniScreenState extends State<BhashiniScreeen> {
   Future<void> _initializeSpeech() async {
     _speechAvailable = await _speech.initialize(
       onStatus: (status) {
-        print("Speech Status: $status");
         if (status == "notListening") {
-          print("Called here");
           stopListening();
-          setState(() {});
+          if (mounted) setState(() {}); // ✅ Only update UI if mounted
         } else if (status == "done") {
-          if (_text.isNotEmpty) {
-            Future.delayed(const Duration(seconds: 2), () {
-              Navigator.push(context, MaterialPageRoute(builder: (ctx) => BhashiniResult(searchResult: _text)));
-            });
-          }
+          // Double-check again before pushing a new route
+          stopListening();
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (ctx) => BhashiniResult(searchResult: _text),
+            ),
+          );
         }
       },
       onError: (error) => print("Speech Error: $error"),
     );
+
     if (!_speechAvailable) {
       print("Speech recognition is not available.");
+    }
+
+    locales = await _speech.locales();
+    for (var locale in locales!) {
+      print('${locale.name} - ${locale.localeId}');
     }
   }
 
@@ -57,10 +65,12 @@ class _BhashiniScreenState extends State<BhashiniScreeen> {
     if (_speechAvailable && !_isListening) {
       setState(() => _isListening = true);
       _speech.listen(
+        localeId: locales![0].localeId,
         listenFor: const Duration(minutes: 1),
         pauseFor: const Duration(seconds: 5),
         onResult: (result) {
           setState(() {
+            print("${result.recognizedWords}");
             _text = result.recognizedWords;
           });
         },
@@ -73,8 +83,8 @@ class _BhashiniScreenState extends State<BhashiniScreeen> {
   /// Stop listening
   void stopListening() {
     // _text = "Share your concern with us! We're here to listen, support, and help you with any questions or issues you may have.Your well-being is our priority.";
-    setState(() => _isListening = false);
     _speech.stop();
+    setState(() => _isListening = false);
   }
 
   @override
